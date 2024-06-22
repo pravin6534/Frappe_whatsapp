@@ -21,7 +21,7 @@
   },
   {
    "fieldname": "instance_id",
-   "fieldtype": "Int",
+   "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Instance Id",
    "reqd": 1

@@ -59,15 +59,15 @@ class ERPGulfNotification(Notification):
             
             receiverNumbers.append(phoneNumber)
             url = f"{settings.api_url}/sendMessage/?instanceid={settings.instance_id}&token={settings.token}&phone={phoneNumber}&body={message}"
-            response = self.send_post_request(settings.api_url,phoneNumber,message,settings.instance_id,doc,memory_url)
+            response = self.send_post_request(settings.api_url,phoneNumber,message,settings.instance_id,doc,memory_url,settings.token)
         frappe.msgprint(_(f"Whatsapp message sent to {','.join(receiverNumbers)}"))
     
     #Pravin Modification
-    def send_post_request(self,url,mobile_number,message_text,session,doc,memory_url):
-        
+    def send_post_request(self,url,mobile_number,message_text,session,doc,memory_url,api):
+        print(mobile_number)
         headers = {
             'accept': 'application/json',
-            'X-Api-Key': 'pravin',
+            'X-Api-Key': api,
             'Content-Type': 'application/json'
         }
         data = {
@@ -80,8 +80,9 @@ class ERPGulfNotification(Notification):
             "caption": message_text,
             "session": session
         }
-
+        
         response = requests.post(url, headers=headers, json=data)
+        print(response)
         return response
     
 
